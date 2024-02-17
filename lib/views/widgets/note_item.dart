@@ -6,61 +6,66 @@ class NoteItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.only(
-        top: 24,
-        bottom: 24,
-        left: 12,
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        vertical: 6,
       ),
-      decoration: BoxDecoration(
-        color: const Color(0xffffcd7a),
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          ListTile(
-            title: const Text(
-              "Flutter tips",
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 26,
-              ),
-            ),
-            subtitle: Padding(
-              padding: const EdgeInsets.only(
-                top: 12,
-              ),
-              child: Text(
-                "Build Your Carrer with Adham Elagaty",
+      child: Container(
+        padding: const EdgeInsets.only(
+          top: 24,
+          bottom: 24,
+          left: 12,
+        ),
+        decoration: BoxDecoration(
+          color: const Color(0xffffcd7a),
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            ListTile(
+              title: const Text(
+                "Flutter tips",
                 style: TextStyle(
-                  color: Colors.black.withOpacity(0.5),
-                  fontSize: 20,
+                  color: Colors.black,
+                  fontSize: 26,
+                ),
+              ),
+              subtitle: Padding(
+                padding: const EdgeInsets.only(
+                  top: 12,
+                ),
+                child: Text(
+                  "Build Your Carrer with Adham Elagaty",
+                  style: TextStyle(
+                    color: Colors.black.withOpacity(0.5),
+                    fontSize: 20,
+                  ),
+                ),
+              ),
+              trailing: IconButton(
+                onPressed: () {},
+                icon: const Icon(
+                  FontAwesomeIcons.trash,
+                  color: Colors.black,
+                  size: 26,
                 ),
               ),
             ),
-            trailing: IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                FontAwesomeIcons.trash,
-                color: Colors.black,
-                size: 26,
+            Padding(
+              padding: const EdgeInsets.only(
+                right: 22,
+              ),
+              child: Text(
+                "May 21,2022",
+                style: TextStyle(
+                  color: Colors.black.withOpacity(0.5),
+                  fontSize: 18,
+                ),
               ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(
-              right: 22,
-            ),
-            child: Text(
-              "May 21,2022",
-              style: TextStyle(
-                color: Colors.black.withOpacity(0.5),
-                fontSize: 18,
-              ),
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
