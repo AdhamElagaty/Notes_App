@@ -5,10 +5,12 @@ class CustomeAppBar extends StatelessWidget {
   const CustomeAppBar({
     super.key,
     required this.title,
+    required this.icon,
     required this.onTap,
   });
 
   final String title;
+  final Icon icon;
   final Function() onTap;
 
   @override
@@ -23,10 +25,7 @@ class CustomeAppBar extends StatelessWidget {
           ),
         ),
         CustomSearchButton(
-          icon: const Icon(
-            Icons.search,
-            size: 32,
-          ),
+          icon: icon,
           onTap: onTap,
         ),
       ],

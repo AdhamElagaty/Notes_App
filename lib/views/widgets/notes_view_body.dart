@@ -16,6 +16,10 @@ class NotesViewBody extends StatelessWidget {
           ),
           CustomeAppBar(
             title: "Notes",
+            icon: const Icon(
+              Icons.search,
+              size: 32,
+            ),
             onTap: () {},
           ),
           const Expanded(
