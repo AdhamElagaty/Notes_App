@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:notes_app/constants.dart';
 
-class CustomeTitleTextField extends StatelessWidget {
-  const CustomeTitleTextField({
+class CustomeTextField extends StatelessWidget {
+  const CustomeTextField({
     super.key,
     required this.hintText,
     required this.labelText,
+    this.onSaved,
     this.height,
     this.width,
     this.maxLength,
@@ -13,6 +14,7 @@ class CustomeTitleTextField extends StatelessWidget {
 
   final String hintText;
   final String labelText;
+  final Function(String?)? onSaved;
   final double? width;
   final double? height;
   final int? maxLength;
@@ -22,7 +24,14 @@ class CustomeTitleTextField extends StatelessWidget {
     return SizedBox(
       width: width,
       height: height,
-      child: TextField(
+      child: TextFormField(
+        onSaved: onSaved,
+        validator: (value) {
+          if (value?.isEmpty ?? true) {
+            return "Field is required!";
+          }
+          return null;
+        },
         maxLines: null,
         maxLength: maxLength,
         expands: (height != null) ? true : false,
