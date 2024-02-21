@@ -33,7 +33,6 @@ class AddNoteBottomSheetBody extends StatelessWidget {
               child: CustomeTitleTextField(
                 hintText: "Write Here....",
                 labelText: "Content",
-                width: 420,
                 height: 200,
               ),
             ),

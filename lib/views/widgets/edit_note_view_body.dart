@@ -36,7 +36,7 @@ class EditNoteViewBody extends StatelessWidget {
               child: CustomeTitleTextField(
                 hintText: "Write Here....",
                 labelText: "Content",
-                width: 420,
+                // width: 420,
                 height: 500,
               ),
             ),

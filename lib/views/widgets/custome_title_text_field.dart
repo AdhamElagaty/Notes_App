@@ -25,7 +25,7 @@ class CustomeTitleTextField extends StatelessWidget {
       child: TextField(
         maxLines: null,
         maxLength: maxLength,
-        expands: (width != null && height != null) ? true : false,
+        expands: (height != null) ? true : false,
         onChanged: (data) {},
         textAlignVertical: TextAlignVertical.top,
         decoration: InputDecoration(
