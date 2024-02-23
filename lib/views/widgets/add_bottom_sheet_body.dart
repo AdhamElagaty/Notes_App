@@ -19,8 +19,8 @@ class AddNoteBottomSheetBody extends StatelessWidget {
             Navigator.pop(context);
           } else if (state is AddNoteFailure) {}
         },
-        builder: (context, state) => ModalProgressHUD(
-          inAsyncCall: false,
+        builder: (context, state) => AbsorbPointer(
+          absorbing: state is AddNoteLoading,
           child: Padding(
             padding: EdgeInsets.only(
               top: 6,

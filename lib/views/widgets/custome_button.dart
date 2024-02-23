@@ -4,10 +4,12 @@ import 'package:notes_app/constants.dart';
 class CustomeButton extends StatelessWidget {
   const CustomeButton({
     super.key,
+    required this.isLoading,
     required this.textButton,
     required this.onTap,
   });
 
+  final bool isLoading;
   final String textButton;
   final Function() onTap;
 
@@ -24,14 +26,21 @@ class CustomeButton extends StatelessWidget {
           ),
         ),
         child: Center(
-          child: Text(
-            textButton,
-            style: const TextStyle(
-              color: Colors.black,
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
+          child: isLoading
+              ? const SizedBox(
+                  height: 24,
+                  width: 24,
+                  child: CircularProgressIndicator(
+                    color: Colors.black,
+                  ))
+              : Text(
+                  textButton,
+                  style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
         ),
       ),
     );
