@@ -7,6 +7,7 @@ class CustomeTextField extends StatelessWidget {
     required this.hintText,
     required this.labelText,
     this.onSaved,
+    this.onChanged,
     this.height,
     this.width,
     this.maxLength,
@@ -16,6 +17,7 @@ class CustomeTextField extends StatelessWidget {
   final String hintText;
   final String labelText;
   final Function(String?)? onSaved;
+  final Function(String?)? onChanged;
   final double? width;
   final double? height;
   final int? maxLength;
@@ -28,6 +30,7 @@ class CustomeTextField extends StatelessWidget {
       height: height,
       child: TextFormField(
         onSaved: onSaved,
+        onChanged: onChanged,
         validator: (value) {
           if (value?.isEmpty ?? true) {
             return "Field is required!";
@@ -38,7 +41,6 @@ class CustomeTextField extends StatelessWidget {
         maxLines: null,
         maxLength: maxLength,
         expands: (height != null) ? true : false,
-        onChanged: (data) {},
         textAlignVertical: TextAlignVertical.top,
         decoration: InputDecoration(
           counterText: "",
