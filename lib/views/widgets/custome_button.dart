@@ -7,11 +7,13 @@ class CustomeButton extends StatelessWidget {
     required this.isLoading,
     required this.textButton,
     required this.onTap,
+    this.color = const Color(kPrimaryColor),
   });
 
   final bool isLoading;
   final String textButton;
   final Function() onTap;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,7 @@ class CustomeButton extends StatelessWidget {
       child: Container(
         height: 50,
         decoration: BoxDecoration(
-          color: const Color(kPrimaryColor),
+          color: color,
           borderRadius: BorderRadius.circular(
             8,
           ),

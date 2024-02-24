@@ -10,6 +10,7 @@ class CustomeTextField extends StatelessWidget {
     this.height,
     this.width,
     this.maxLength,
+    this.initialValue,
   });
 
   final String hintText;
@@ -18,6 +19,7 @@ class CustomeTextField extends StatelessWidget {
   final double? width;
   final double? height;
   final int? maxLength;
+  final String? initialValue;
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +34,7 @@ class CustomeTextField extends StatelessWidget {
           }
           return null;
         },
+        initialValue: initialValue,
         maxLines: null,
         maxLength: maxLength,
         expands: (height != null) ? true : false,
