@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:notes_app/constants.dart';
 import 'package:notes_app/cubits/add_note_cubit/add_note_cubit.dart';
 import 'package:notes_app/models/note_model.dart';
 import 'package:notes_app/views/widgets/add_color_list.dart';
@@ -20,6 +21,7 @@ class _AddNoteFormState extends State<AddNoteForm> {
   final GlobalKey<FormState> formKey = GlobalKey();
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
   String? title, subTitle;
+  bool isValidT = false, isValidSupT = false;
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +40,9 @@ class _AddNoteFormState extends State<AddNoteForm> {
               onSaved: (value) {
                 title = value;
               },
+              onChanged: (data) {
+                checkTitleValidation(data);
+              },
             ),
           ),
           Padding(
@@ -49,39 +54,71 @@ class _AddNoteFormState extends State<AddNoteForm> {
               onSaved: (value) {
                 subTitle = value;
               },
+              onChanged: (data) {
+                checkSubTitleValidation(data);
+              },
             ),
           ),
           const Padding(
             padding: EdgeInsets.only(bottom: 18, top: 6),
             child: AddColorList(),
           ),
-          BlocBuilder<AddNoteCubit, AddNoteState>(
-            builder: (context, state) {
-              return CustomeButton(
-                isLoading: State is AddNoteLoading,
-                textButton: "Add",
-                onTap: () {
-                  if (formKey.currentState!.validate()) {
-                    formKey.currentState!.save();
-                    var formattedDate =
-                        DateFormat("dd-M-yyyy").format(DateTime.now());
-                    NoteModel noteModel = NoteModel(
-                      title: title!,
-                      subTitle: subTitle!,
-                      date: formattedDate,
-                      color: Colors.blue.value,
-                    );
-                    BlocProvider.of<AddNoteCubit>(context).addNote(noteModel);
-                  } else {
-                    autovalidateMode = AutovalidateMode.always;
-                    setState(() {});
-                  }
-                },
-              );
-            },
+          AbsorbPointer(
+            absorbing: isValidSupT && isValidT ? false : true,
+            child: BlocBuilder<AddNoteCubit, AddNoteState>(
+              builder: (context, state) {
+                return CustomeButton(
+                  isLoading: State is AddNoteLoading,
+                  textButton: "Add",
+                  color: isValidSupT && isValidT
+                      ? const Color(kPrimaryColor)
+                      : Colors.grey,
+                  onTap: () {
+                    addNote(context);
+                  },
+                );
+              },
+            ),
           ),
         ],
       ),
     );
+  }
+
+  void addNote(BuildContext context) {
+    if (formKey.currentState!.validate()) {
+      formKey.currentState!.save();
+      var formattedDate = DateFormat("dd-M-yyyy").format(DateTime.now());
+      NoteModel noteModel = NoteModel(
+        title: title!,
+        subTitle: subTitle!,
+        date: formattedDate,
+        color: Colors.blue.value,
+      );
+      BlocProvider.of<AddNoteCubit>(context).addNote(noteModel);
+    } else {
+      autovalidateMode = AutovalidateMode.always;
+      setState(() {});
+    }
+  }
+
+  void checkSubTitleValidation(String? data) {
+    if (!(data?.isEmpty ?? true) && !isValidSupT) {
+      isValidSupT = true;
+      setState(() {});
+    } else if ((data?.isEmpty ?? true) && isValidSupT) {
+      isValidSupT = false;
+      setState(() {});
+    }
+  }
+
+  void checkTitleValidation(String? data) {
+    if (!(data?.isEmpty ?? true) && !isValidT) {
+      isValidT = true;
+      setState(() {});
+    } else if ((data?.isEmpty ?? true) && isValidT) {
+      isValidT = false;
+      setState(() {});
+    }
   }
 }
